@@ -38,6 +38,13 @@ class Ui extends TagLib{
                break;
             case 'image':
                $arr = json_decode($data->content,true);
+
+               foreach (['width','height','url','cover','alt'] as $name) {
+                  if (empty($arr[$name])) $arr['alt'] = '';
+               }
+
+               
+               
                $width = empty($arr['width'])?'':'width:'.$arr['width'].';';
                $height = empty($arr['height'])?'':'height:'.$arr['height'].';';
                $result = '<a target="_blank" href="'.$arr['url'].'" style="'.$width.$height.'"><img style="'.$width.$height.'" src="'.$arr['cover'].'" alt="'.$arr['alt'].'"></a>';
